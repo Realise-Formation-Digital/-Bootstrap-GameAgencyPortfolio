@@ -1,0 +1,17 @@
+html, body {
+    margin: 0;
+}
+
+.hero {
+    width: 100%;
+}
+
+#first {
+    background-color: aqua;
+    min-height: 700px;
+}
+
+#second {
+    background-color: royalblue;
+    min-height: 700px;
+}
