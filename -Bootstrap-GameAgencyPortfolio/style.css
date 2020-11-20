@@ -74,3 +74,39 @@ img1 {
  height: 200px:
  width: 200px;
 }
+/* footer style */
+
+footer {
+  background-color: black;
+  padding: 25px 0 20 px;
+}
+footer small {
+   color: #ddd;
+  font-size : 0,9e
+}
+ 
+footer small .footer-heart {
+  font-size: 20px;
+
+}
+footer small a{
+  color:blue;
+}
+footer ul {
+  list-style-type: none;
+  margin: 0;
+
+} 
+footer ul li {
+  display: inline-block;
+}
+footer ul li {
+  margin: 0 12px;
+  font-size: 0.8em;
+}
+
+/* end: footer style*/
+
+
+
+
