@@ -1,5 +1,5 @@
 <?php
-
+$success = '';
 $error = '';
 $name = '';
 $email = '';
@@ -22,7 +22,7 @@ if(isset($_POST["submit"]))
 {
  if(empty($_POST["name"]))
  {
-  $error .= '<p><label class="text-danger">Entrer votre adresse e-mail</label></p>';
+  $error .= '<p><label class="text-danger">Entrer votre nom</label></p>';
  }
  else
 
@@ -90,7 +90,7 @@ if(isset($_POST["submit"]))
   // Formate une ligne en csv et l'écrit dans un fichier (donneés formulaire de contact)
   $separator = ";";
   fputcsv($file_open, $form_data, $separator);
-  $error = '<label class="text-success">Merci de nous contacter.</label>';
+  $success = 'Merci de nous contacter.';
   $name = '';
   $email = '';
   $subject = '';
@@ -139,13 +139,14 @@ if(isset($_POST["submit"]))
                                 <form method="post">
                                 <h3>Formulaire de contact</h3><br />
                                 <?php echo $error; ?>
+                                <?php echo $success; ?>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label>Entre votre nom</label><input type="text" name="name" placeholder="Entrer votre nom" class="form-control" value="<?php echo $name; ?>" />
+                                <label>Entrer votre nom</label><input type="text" name="name" placeholder="Entrer votre nom" class="form-control" value="<?php echo $name; ?>" />
                             </div>
                         </div>
                         <div class="col-6">
@@ -158,7 +159,7 @@ if(isset($_POST["submit"]))
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                 <label>Entre le sujet</label><input type="text" name="subject" class="form-control" placeholder="Entrer le sujet" value="<?php echo $subject; ?>" />
+                                 <label>Entrer le sujet</label><input type="text" name="subject" class="form-control" placeholder="Entrer le sujet" value="<?php echo $subject; ?>" />
                             </div>
                         </div>
                     </div>
