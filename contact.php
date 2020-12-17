@@ -70,6 +70,8 @@ if(isset($_POST["submit"]))
  if($error == '')
 
  // Crée ou ouvre un fichier csv
+
+ 
  {
   $file_open = fopen("messages.csv​", "a");
   $no_rows = count(file("messages.csv​"));
@@ -77,17 +79,17 @@ if(isset($_POST["submit"]))
   {
    $no_rows = ($no_rows - 1) + 1;
   }
-  $form_data = array(
-   'sr_no'  => $no_rows,
-   'name'  => $name,
-   'email'  => $email,
-   'subject' => $subject,
-   'message' => $message
+  $form_data = array (
+   'sr_no' . ";"  => $no_rows,
+   'name' . ";" => $name,
+   'email'  . ";" => $email,
+   'subject' . ";" => $subject,
+   'message' . ";" => $message
   );
 
   // Formate une ligne en csv et l'écrit dans un fichier (donneés formulaire de contact)
-  
-  fputcsv($file_open, $form_data);
+  $separator = ";";
+  fputcsv($file_open, $form_data, $separator);
   $error = '<label class="text-success">Merci de nous contacter.</label>';
   $name = '';
   $email = '';
