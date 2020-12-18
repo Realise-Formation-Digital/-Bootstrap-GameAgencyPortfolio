@@ -1,4 +1,5 @@
 <?php
+
 $success = '';
 $error = '';
 $name = '';
@@ -90,7 +91,7 @@ if(isset($_POST["submit"]))
   // Formate une ligne en csv et l'écrit dans un fichier (donneés formulaire de contact)
   $separator = ";";
   fputcsv($file_open, $form_data, $separator);
-  $success = 'Merci de nous contacter.';
+  $success = '<label class="text-success">Merci de nous contacter.</label>';
   $name = '';
   $email = '';
   $subject = '';
