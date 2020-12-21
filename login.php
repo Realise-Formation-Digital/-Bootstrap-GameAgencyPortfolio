@@ -75,7 +75,17 @@ if ((isSet($_POST['gestion'])) && ($_POST['gestion'] == 'Connexion')) {
         <a href="news.html" target="news.html">News</a>
         <a href="contact.html">Contact</a>
         <div class="search-container">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#loginModal">Connexion</button>  
+        <?php
+        if ($_SESSION['logg'] == '') {
+          echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#loginModal">Connexion</button>';
+        } else {
+          echo '<form name="logout" method="POST" action="logout.php"><input type="submit" value="Se déconnecter" class="btn btn-info"></button></form>';
+
+        }
+        ?>
+        
+        
+        
         </div>
     </div>
     <div style="padding-left:16px">
