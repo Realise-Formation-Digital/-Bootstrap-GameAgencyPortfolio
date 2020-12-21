@@ -33,27 +33,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
     
-  if (empty($_POST["website"])) {
-    $website = "";
+  if (empty($_POST["subject"])) {
+    $subject = "";
   } else {
-    $website = test_input($_POST["website"]);
-    // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
-    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
-      $websiteErr = "Invalid URL";
-    }
+    $subject = test_input($_POST["subject"]);
   }
 
-  if (empty($_POST["comment"])) {
-    $comment = "";
+  if (empty($_POST["message"])) {
+    $message = "";
   } else {
-    $comment = test_input($_POST["comment"]);
+    $message = test_input($_POST["message"]);
   }
 
-  if (empty($_POST["gender"])) {
-    $genderErr = "Gender is required";
-  } else {
-    $gender = test_input($_POST["gender"]);
-  }
 }
 
 function test_input($data) {
@@ -73,16 +64,12 @@ function test_input($data) {
   E-mail: <input type="text" name="email" value="<?php echo $email;?>">
   <span class="error">* <?php echo $emailErr;?></span>
   <br><br>
-  Website: <input type="text" name="website" value="<?php echo $website;?>">
+  Subject: <input type="text" name="subject" value="<?php echo $subject;?>">
   <span class="error"><?php echo $websiteErr;?></span>
   <br><br>
-  Comment: <textarea name="comment" rows="5" cols="40"><?php echo $comment;?></textarea>
+  Message: <textarea name="message" rows="5" cols="40"><?php echo $message;?></textarea>
   <br><br>
-  Gender:
-  <input type="radio" name="gender" <?php if (isset($gender) && $gender=="female") echo "checked";?> value="female">Female
-  <input type="radio" name="gender" <?php if (isset($gender) && $gender=="male") echo "checked";?> value="male">Male
-  <input type="radio" name="gender" <?php if (isset($gender) && $gender=="other") echo "checked";?> value="other">Other  
-  <span class="error">* <?php echo $genderErr;?></span>
+ 
   <br><br>
   <input type="submit" name="submit" value="Submit">  
 </form>
@@ -93,12 +80,13 @@ echo $name;
 echo "<br>";
 echo $email;
 echo "<br>";
-echo $website;
+echo $subject;
 echo "<br>";
-echo $comment;
-echo "<br>";
-echo $gender;
+echo $message;
 
+
+
+/*CSV file*/
 if($error == '')
 {
 $file_open = fopen("contact_data.csv", "a");
@@ -114,7 +102,8 @@ $form_data = array(
 'subject' => $subject,
 'message' => $message
 );
-fputcsv($file_open, $form_data);
+$separator = ";";
+fputcsv($file_open, $form_data, $separator);
 $error = '<label class="text-success">Thank you for contacting us</label>';
 $name = '';
 $email = '';
