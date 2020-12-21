@@ -112,7 +112,7 @@ if(isset($_POST["submit"])) {
 <section>
     <div class="jumbotron text-center">
         <h1>ADALT Agency</h1>
-        <p>Votre Agence de Game développement multi-supports</p>
+        <p>Votre Agence de Game développement multisupports</p>
     </div>
     <div class="container">
         <div class="row">
