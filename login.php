@@ -2,86 +2,58 @@
 
 session_start();
 
-$success = '';
-$error = '';
-$name = '';
+$_SESSION['logg'] = '';
+
+
+
+//	Initialisation des variables
+$error = array();
+$user = '';
 $email = '';
-$subject = '';
-$message = '';
 
-// Supprime les espaces, antislashs d'une chaîne, Convertit les caractères spéciaux en entités HTML
 
-function clean_text($string) {
-    $string = trim($string);
-    $string = stripslashes($string);
-    $string = htmlspecialchars($string);
-    return $string;
+
+
+if ((isSet($_POST['gestion'])) && ($_POST['gestion'] == 'Connexion')) {
+	
+	
+	//	Controle que les champs ont bien été renseignés
+	if ($_POST['user'] == '') { $error[] = 'Votre nom d&rsquo;utilisateur est vide'; }
+	if ($_POST['pwd'] == '') { $error[] = 'Votre mot de passe est vide'; }
+	
+	
+	
+	if (count($error) == 0) {
+		
+		//	 Conversion du MDP crypté
+		$mdp = md5($_POST['pwd']);
+		
+		
+		
+		if (file_exists('users.csv')) {
+			$fp = fopen('users.csv','r');
+			while (($data = fgetcsv($fp)) !== FALSE) {
+				
+				$row = explode(';',$data[0]);
+				if (($row[0] == $_POST['user']) && ($row[2] == $mdp)) {
+					
+					$user = $row[0];
+					$email = $row[1];
+					$_SESSION['logg'] = array(
+																	'user' 		=> $user,
+																	'email' 		=> $email
+										);
+					break;
+				}
+			}
+			fclose($fp);
+		} else { $error[] = 'Impossible de trouver la base de donn&eacute;es'; }
+		
+	}
+	
 }
 
-// Détermine si une variable est déclarée et est différente de null
 
-if(isset($_POST["submit"])) {
-    if(empty($_POST["name"])) {
-        $error .= '<p><label class="text-danger">Entrer votre nom</label></p>';
-    }
-    // Vérifie que le champs contient seulement des caractères et espaces
-    else {
-        $name = clean_text($_POST["name"]);
-        if(!preg_match("/^[a-zA-Z ]*$/",$name)) {
-            $error .= '<p><label class="text-danger">Les lettres et les espaces sont uniquement acceptés</label></p>'; 
-        }
-    }
-    if(empty($_POST["email"])) {
-        $error .= '<p><label class="text-danger">Entrer votre adresse e-mail</label></p>';
-    }
-    // Vérifie que l'email est valide
-    else {
-        $email = clean_text($_POST["email"]);
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $error .= '<p><label class="text-danger">Le format du champs e-mail est invalide</label></p>';
-        }
-    }
-    if(empty($_POST["subject"])) {
-        $error .= '<p><label class="text-danger">Le champs sujet est requis</label></p>';
-    }
-    else {
-        $subject = clean_text($_POST["subject"]);
-    }
-    if(empty($_POST["message"])) {
-        $error .= '<p><label class="text-danger">Le champs message est requis</label></p>';
-    } 
-    else {
-        $message = clean_text($_POST["message"]);
-    }
-
-    
-    if($error == '') {
-        // Crée ou ouvre un fichier csv
-        $file_open = fopen("messages.csv​", "a");
-        $no_rows = count(file("messages.csv​"));
-        if($no_rows > 1) {
-            $no_rows = ($no_rows - 1) + 1;
-        }
-        $form_data = array (
-            'sr_no' . ";"  => $no_rows,
-            'name' . ";" => $name,
-            'email'  . ";" => $email,
-            'subject' . ";" => $subject,
-            'message' . ";" => $message
-        );
-        
-        // Formate une ligne en csv et l'écrit dans un fichier (donneés formulaire de contact)
-        $separator = ";";
-        fputcsv($file_open, $form_data, $separator);
-        $success = '<label class="text-success">Merci de nous contacter.</label>';
-        $name = '';
-        $email = '';
-        $subject = '';
-        $message = '';
-
-        fclose($file_open);
-    }
-}
 
 ?>
 <!DOCTYPE html>
@@ -121,21 +93,23 @@ if(isset($_POST["submit"])) {
                         <div class="col-12">
                             <div>
                                 <form method="post">
-                                <h3>Formulaire de contact</h3><br />
-                                <?php echo $error; ?>
-                                <?php echo $success; ?>
+                                <h3>Login</h3><br />
+                                <?php
+                                //	Affichage des erreurs de contrôle
+                                if (count($error) > 0) { for ($i = 0; $i < count($error); $i++) { echo $error[$i].'<br />'; } }
+                                ?>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label>Entrer votre nom</label><input type="text" name="name" placeholder="Entrer votre nom" class="form-control" value="<?php echo $name; ?>" />
+                                <label>Entrer votre nom d'utilisateur</label><input type="text" name="user" placeholder="Entrer votre nom" class="form-control" value="<?php echo $user; ?>" />
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label>Entrer votre e-mail</label><input type="text" name="email" class="form-control" placeholder="Entrer votre e-mail" value="<?php echo $email; ?>" />
+                                <label>Entrer votre mot de passe</label><input type="password" name="pwd" class="form-control" placeholder="Mot de passe" value="<?php echo $pwd; ?>" />
                             </div>
                         </div>
                     </div>
@@ -143,27 +117,18 @@ if(isset($_POST["submit"])) {
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                 <label>Entrer le sujet</label><input type="text" name="subject" class="form-control" placeholder="Entrer le sujet" value="<?php echo $subject; ?>" />
+                            <input type="submit" name="gestion" value="Connexion" class="btn btn-info" />
                             </div>
                         </div>
                     </div>
                     <br>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Entrer votre message</label><textarea name="message" class="form-control" placeholder="Entrer votre message"><?php echo $message; ?></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <input type="submit" name="submit" class="btn btn-info" value="Envoyer" />
-                            </div>
-                        </div>
-                    </div>
-                    <br>
+                    <?php
+                    if ($_SESSION['logg'] == '') {
+                        echo '&bull;&nbsp;Vous n&rsquo;&ecirc;tes pas connect&eacute;&nbsp;!';
+                    } else {
+                        echo 'Connect&eacute;&nbsp;:&nbsp;&nbsp;'.$_SESSION['logg']['user'].' - '.$_SESSION['logg']['email'];
+                    }
+                    ?>
                 </form>
             </div>
         </div>

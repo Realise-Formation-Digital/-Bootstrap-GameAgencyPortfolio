@@ -1,94 +1,76 @@
 <?php
 
-session_start();
-
-$success = '';
-$error = '';
-$name = '';
+//	Initialisation des variables
+$error = array();
+$user = '';
 $email = '';
-$subject = '';
-$message = '';
+$password1 = '';
+$password2 = '';
+$mdpMin = 6;
 
-// Supprime les espaces, antislashs d'une chaîne, Convertit les caractères spéciaux en entités HTML
 
-function clean_text($string) {
-    $string = trim($string);
-    $string = stripslashes($string);
-    $string = htmlspecialchars($string);
-    return $string;
+
+
+if ((isSet($_POST['gestion'])) && ($_POST['gestion'] == 'Envoyer')) {
+	
+	
+	//	Controle que le champ a bien �t� renseign�
+	if ($_POST['user'] == '') { $error[] = 'Votre nom d&rsquo;utilisateur est vide'; }
+	if ($_POST['email'] == '') { $error[] = 'Vous devez sp&eacute;cifier votre email'; }
+	if ($_POST['password1'] == '') { $error[] = 'Mot de passe 1 vide'; }
+	if ($_POST['password2'] == '') { $error[] = 'Mot de passe 2 vide'; }
+	
+	// Controle de la validit� de l'email
+	if (preg_match_all('/[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,9}/',$_POST['email'],$tblSortie) == 0) {
+		$error[] = 'Votre adresse email comporte des erreurs';
+	}
+	
+	//	Control du mot de passe
+	if (strlen($_POST['password1']) < $mdpMin) { $error[] = 'Votre mot de passe doit contenir plus de '.$mdpMin.' caract&egrave;res pour que votre inscription soit valide!'; }
+	if ($_POST['password1'] != $_POST['password2']) { $error[] = 'Vos deux mots de passe sp&eacute;cifi&eacute; ne sont pas identiques'; }
+	
+	
+	
+	//	Recherche si le "user" est d�j� utilis�
+	$find = 0;
+	if (file_exists('users.csv')) {
+		$fp = fopen('users.csv','r');
+		while (($data = fgetcsv($fp)) !== FALSE) {
+			$row = explode(';',$data[0]);
+			if ($row[0] == $_POST['user']) { $find++; }
+		} fclose($fp);
+	}
+	if ($find > 0) { $error[] = 'Utilisateur existe d&eacute;j&agrave;...'; }
+	
+	
+	
+	
+	
+	
+	// Enregistrement des donn�es
+	if (count($error) == 0) {
+		
+		
+		//	Conversion des donn�es
+		$mdp = md5($_POST['password1']);
+		
+		// Cr�ation d'une table comportant les donn�es envoy�es
+		$liste = array($_POST['user'],$_POST['email'],$mdp);
+		
+		
+		//	Ecriture dans le fichier CSV
+		$fp = fopen('users.csv','a+',';');
+		fputcsv($fp,$liste,';','"');
+		fclose($fp);
+		
+	}
 }
-
-// Détermine si une variable est déclarée et est différente de null
-
-if(isset($_POST["submit"])) {
-    if(empty($_POST["name"])) {
-        $error .= '<p><label class="text-danger">Entrer votre nom</label></p>';
-    }
-    // Vérifie que le champs contient seulement des caractères et espaces
-    else {
-        $name = clean_text($_POST["name"]);
-        if(!preg_match("/^[a-zA-Z ]*$/",$name)) {
-            $error .= '<p><label class="text-danger">Les lettres et les espaces sont uniquement acceptés</label></p>'; 
-        }
-    }
-    if(empty($_POST["email"])) {
-        $error .= '<p><label class="text-danger">Entrer votre adresse e-mail</label></p>';
-    }
-    // Vérifie que l'email est valide
-    else {
-        $email = clean_text($_POST["email"]);
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $error .= '<p><label class="text-danger">Le format du champs e-mail est invalide</label></p>';
-        }
-    }
-    if(empty($_POST["subject"])) {
-        $error .= '<p><label class="text-danger">Le champs sujet est requis</label></p>';
-    }
-    else {
-        $subject = clean_text($_POST["subject"]);
-    }
-    if(empty($_POST["message"])) {
-        $error .= '<p><label class="text-danger">Le champs message est requis</label></p>';
-    } 
-    else {
-        $message = clean_text($_POST["message"]);
-    }
-
-    
-    if($error == '') {
-        // Crée ou ouvre un fichier csv
-        $file_open = fopen("messages.csv​", "a");
-        $no_rows = count(file("messages.csv​"));
-        if($no_rows > 1) {
-            $no_rows = ($no_rows - 1) + 1;
-        }
-        $form_data = array (
-            'sr_no' . ";"  => $no_rows,
-            'name' . ";" => $name,
-            'email'  . ";" => $email,
-            'subject' . ";" => $subject,
-            'message' . ";" => $message
-        );
-        
-        // Formate une ligne en csv et l'écrit dans un fichier (donneés formulaire de contact)
-        $separator = ";";
-        fputcsv($file_open, $form_data, $separator);
-        $success = '<label class="text-success">Merci de nous contacter.</label>';
-        $name = '';
-        $email = '';
-        $subject = '';
-        $message = '';
-
-        fclose($file_open);
-    }
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Contact</title>
+    <title>Inscription</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet">
@@ -101,7 +83,7 @@ if(isset($_POST["submit"])) {
     <div class="topnav">
         <a class="active" href="index.html">Home</a>
         <a href="news.html" target="news.html">News</a>
-        <a href="contact.html">Contact</a>
+        <a href="contact.php">Contact</a>
         <div class="search-container">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#loginModal">Connexion</button>  
         </div>
@@ -120,22 +102,24 @@ if(isset($_POST["submit"])) {
                     <div class="row">
                         <div class="col-12">
                             <div>
-                                <form method="post">
-                                <h3>Formulaire de contact</h3><br />
-                                <?php echo $error; ?>
-                                <?php echo $success; ?>
+                                <form method="POST">
+                                <h3>Inscription</h3><br />
+                                <?php
+                                //	Affichage des erreurs de contr�le
+                                if (count($error) > 0) { for ($i = 0; $i < count($error); $i++) { echo $error[$i].'<br />'; } }
+                                ?>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label>Entrer votre nom</label><input type="text" name="name" placeholder="Entrer votre nom" class="form-control" value="<?php echo $name; ?>" />
+                                <label>Entrer votre nom d'utilisateur </label><input type="text" name="user" placeholder="Entrer votre nom" class="form-control" value="<?php if (isSet($_POST['user']) && ($_POST['user'] != '')) { echo $_POST['user']; } ?>" />
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label>Entrer votre e-mail</label><input type="text" name="email" class="form-control" placeholder="Entrer votre e-mail" value="<?php echo $email; ?>" />
+                                <label>Entrer votre e-mail </label><input type="text" name="email" class="form-control" placeholder="Entrer votre e-mail" value="<?php if (isSet($_POST['email']) && ($_POST['email'] != '')) { echo $_POST['email']; } ?>" />
                             </div>
                         </div>
                     </div>
@@ -143,7 +127,7 @@ if(isset($_POST["submit"])) {
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                 <label>Entrer le sujet</label><input type="text" name="subject" class="form-control" placeholder="Entrer le sujet" value="<?php echo $subject; ?>" />
+                                 <label>Entrer votre mot de passe </label><input class="form-control" type="password" name="password1" value="" />
                             </div>
                         </div>
                     </div>
@@ -151,7 +135,7 @@ if(isset($_POST["submit"])) {
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label>Entrer votre message</label><textarea name="message" class="form-control" placeholder="Entrer votre message"><?php echo $message; ?></textarea>
+                                <label>Confirmer votre mot de passe </label><input class="form-control" type="password" name="password2" value="">
                             </div>
                         </div>
                     </div>
@@ -159,7 +143,7 @@ if(isset($_POST["submit"])) {
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <input type="submit" name="submit" class="btn btn-info" value="Envoyer" />
+                                <input type="submit" name="gestion" class="btn btn-info" value="Envoyer" />
                             </div>
                         </div>
                     </div>
