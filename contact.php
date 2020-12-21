@@ -1,5 +1,6 @@
 <?php
 
+$success = '';
 $error = '';
 $name = '';
 $email = '';
@@ -22,7 +23,7 @@ if(isset($_POST["submit"]))
 {
  if(empty($_POST["name"]))
  {
-  $error .= '<p><label class="text-danger">Entrer votre adresse e-mail</label></p>';
+  $error .= '<p><label class="text-danger">Entrer votre nom</label></p>';
  }
  else
 
@@ -70,6 +71,8 @@ if(isset($_POST["submit"]))
  if($error == '')
 
  // Crée ou ouvre un fichier csv
+
+ 
  {
   $file_open = fopen("messages.csv​", "a");
   $no_rows = count(file("messages.csv​"));
@@ -77,18 +80,18 @@ if(isset($_POST["submit"]))
   {
    $no_rows = ($no_rows - 1) + 1;
   }
-  $form_data = array(
-   'sr_no'  => $no_rows,
-   'name'  => $name,
-   'email'  => $email,
-   'subject' => $subject,
-   'message' => $message
+  $form_data = array (
+   'sr_no' . ";"  => $no_rows,
+   'name' . ";" => $name,
+   'email'  . ";" => $email,
+   'subject' . ";" => $subject,
+   'message' . ";" => $message
   );
 
   // Formate une ligne en csv et l'écrit dans un fichier (donneés formulaire de contact)
-  
-  fputcsv($file_open, $form_data);
-  $error = '<label class="text-success">Merci de nous contacter.</label>';
+  $separator = ";";
+  fputcsv($file_open, $form_data, $separator);
+  $success = '<label class="text-success">Merci de nous contacter.</label>';
   $name = '';
   $email = '';
   $subject = '';
@@ -137,13 +140,14 @@ if(isset($_POST["submit"]))
                                 <form method="post">
                                 <h3>Formulaire de contact</h3><br />
                                 <?php echo $error; ?>
+                                <?php echo $success; ?>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label>Entre votre nom</label><input type="text" name="name" placeholder="Entrer votre nom" class="form-control" value="<?php echo $name; ?>" />
+                                <label>Entrer votre nom</label><input type="text" name="name" placeholder="Entrer votre nom" class="form-control" value="<?php echo $name; ?>" />
                             </div>
                         </div>
                         <div class="col-6">
@@ -156,7 +160,7 @@ if(isset($_POST["submit"]))
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                 <label>Entre le sujet</label><input type="text" name="subject" class="form-control" placeholder="Entrer le sujet" value="<?php echo $subject; ?>" />
+                                 <label>Entrer le sujet</label><input type="text" name="subject" class="form-control" placeholder="Entrer le sujet" value="<?php echo $subject; ?>" />
                             </div>
                         </div>
                     </div>
