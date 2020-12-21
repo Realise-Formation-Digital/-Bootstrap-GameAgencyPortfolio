@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $success = '';
 $error = '';
 $name = '';
@@ -9,94 +11,76 @@ $message = '';
 
 // Supprime les espaces, antislashs d'une chaîne, Convertit les caractères spéciaux en entités HTML
 
-function clean_text($string)
-{
- $string = trim($string);
- $string = stripslashes($string);
- $string = htmlspecialchars($string);
- return $string;
+function clean_text($string) {
+    $string = trim($string);
+    $string = stripslashes($string);
+    $string = htmlspecialchars($string);
+    return $string;
 }
 
 // Détermine si une variable est déclarée et est différente de null
 
-if(isset($_POST["submit"]))
-{
- if(empty($_POST["name"]))
- {
-  $error .= '<p><label class="text-danger">Entrer votre nom</label></p>';
- }
- else
+if(isset($_POST["submit"])) {
+    if(empty($_POST["name"])) {
+        $error .= '<p><label class="text-danger">Entrer votre nom</label></p>';
+    }
+    // Vérifie que le champs contient seulement des caractères et espaces
+    else {
+        $name = clean_text($_POST["name"]);
+        if(!preg_match("/^[a-zA-Z ]*$/",$name)) {
+            $error .= '<p><label class="text-danger">Les lettres et les espaces sont uniquement acceptés</label></p>'; 
+        }
+    }
+    if(empty($_POST["email"])) {
+        $error .= '<p><label class="text-danger">Entrer votre adresse e-mail</label></p>';
+    }
+    // Vérifie que l'email est valide
+    else {
+        $email = clean_text($_POST["email"]);
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error .= '<p><label class="text-danger">Le format du champs e-mail est invalide</label></p>';
+        }
+    }
+    if(empty($_POST["subject"])) {
+        $error .= '<p><label class="text-danger">Le champs sujet est requis</label></p>';
+    }
+    else {
+        $subject = clean_text($_POST["subject"]);
+    }
+    if(empty($_POST["message"])) {
+        $error .= '<p><label class="text-danger">Le champs message est requis</label></p>';
+    } 
+    else {
+        $message = clean_text($_POST["message"]);
+    }
 
- // Vérifie que le champs contient seulement des caractères et espaces
+    
+    if($error == '') {
+        // Crée ou ouvre un fichier csv
+        $file_open = fopen("messages.csv​", "a");
+        $no_rows = count(file("messages.csv​"));
+        if($no_rows > 1) {
+            $no_rows = ($no_rows - 1) + 1;
+        }
+        $form_data = array (
+            'sr_no' . ";"  => $no_rows,
+            'name' . ";" => $name,
+            'email'  . ";" => $email,
+            'subject' . ";" => $subject,
+            'message' . ";" => $message
+        );
+        
+        // Formate une ligne en csv et l'écrit dans un fichier (donneés formulaire de contact)
+        $separator = ";";
+        fputcsv($file_open, $form_data, $separator);
+        $success = '<label class="text-success">Merci de nous contacter.</label>';
+        $name = '';
+        $email = '';
+        $subject = '';
+        $message = '';
 
- {
-  $name = clean_text($_POST["name"]);
-  if(!preg_match("/^[a-zA-Z ]*$/",$name))
-  {
-   $error .= '<p><label class="text-danger">Les lettres et les espaces sont uniquement acceptés</label></p>';
-  }
- }
- if(empty($_POST["email"]))
- {
-  $error .= '<p><label class="text-danger">Entrer votre adresse e-mail</label></p>';
- }
- else
-
- // Vérifie que l'email est valide
-
- {
-  $email = clean_text($_POST["email"]);
-  if(!filter_var($email, FILTER_VALIDATE_EMAIL))
-  {
-   $error .= '<p><label class="text-danger">Le format du champs e-mail est invalide</label></p>';
-  }
- }
- if(empty($_POST["subject"]))
- {
-  $error .= '<p><label class="text-danger">Le champs sujet est requis</label></p>';
- }
- else
- {
-  $subject = clean_text($_POST["subject"]);
- }
- if(empty($_POST["message"]))
- {
-  $error .= '<p><label class="text-danger">Le champs message est requis</label></p>';
- }
- else
- {
-  $message = clean_text($_POST["message"]);
- }
-
- if($error == '')
-
- // Crée ou ouvre un fichier csv
-
- 
- {
-  $file_open = fopen("messages.csv​", "a");
-  $no_rows = count(file("messages.csv​"));
-  if($no_rows > 1)
-  {
-   $no_rows = ($no_rows - 1) + 1;
-  }
-  $form_data = array (
-   'sr_no' . ";"  => $no_rows,
-   'name' . ";" => $name,
-   'email'  . ";" => $email,
-   'subject' . ";" => $subject,
-   'message' . ";" => $message
-  );
-
-  // Formate une ligne en csv et l'écrit dans un fichier (donneés formulaire de contact)
-  $separator = ";";
-  fputcsv($file_open, $form_data, $separator);
-  $success = '<label class="text-success">Merci de nous contacter.</label>';
-  $name = '';
-  $email = '';
-  $subject = '';
-  $message = '';
- }
+        fclose($file_open);
+    }
 }
 
 ?>
@@ -109,8 +93,8 @@ if(isset($_POST["submit"]))
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <nav>
@@ -119,10 +103,9 @@ if(isset($_POST["submit"]))
         <a href="news.html" target="news.html">News</a>
         <a href="contact.html">Contact</a>
         <div class="search-container">
-            <button type="submit" onclick="showLoginModal()">Login</button>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#loginModal">Connexion</button>  
         </div>
     </div>
-
     <div style="padding-left:16px">
     </div>
 </nav>
@@ -189,35 +172,40 @@ if(isset($_POST["submit"]))
 </section>
 
 <!-- Modal Login-->
-<div id="modalLogin" class="modal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Login Modal</h5>
-                <button type="button" class="close" onclick="hideLoginModal()" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-6">
-                            <input id="emailLogin" type="text" class="form-control" placeholder="Email">
-                        </div>
-                        <div class="col-6">
-                            <input id="passwordLogin" type="text" class="form-control" placeholder="Password">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="hideLoginModal()">Close</button>
-                <button type="button" class="btn btn-primary" onclick="loginService()">Save changes</button>
-            </div>
+<form name="login" method="POST" action="login.php">
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-title text-center">
+          <h4>Login</h4>
         </div>
-    </div>
+        <div class="d-flex flex-column text-center">
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control" name="user" placeholder="Nom d'utilisateur...">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" name="pwd" placeholder="Mot de passe...">
+            </div>
+            <button type="submit" class="btn btn-info btn-block btn-round" name="gestion" value="Connexion">Connexion</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <div class="signup-section">Pas encore membre? <a href="register.php" class="text-info"> S'inscrire</a>.</div>
+      </div>
+  </div>
 </div>
+</form>
 
+    
+<script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
