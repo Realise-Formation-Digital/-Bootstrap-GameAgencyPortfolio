@@ -2,6 +2,7 @@
 
 //	Initialisation des variables
 $error = array();
+$success = '';
 $user = '';
 $email = '';
 $password1 = '';
@@ -60,7 +61,8 @@ if ((isSet($_POST['gestion'])) && ($_POST['gestion'] == 'Envoyer')) {
 		
 		//	Ecriture dans le fichier CSV
 		$fp = fopen('users.csv','a+',';');
-		fputcsv($fp,$liste,';','"');
+        fputcsv($fp,$liste,';','"');
+        $success = '<label class="text-success">Inscription réussie</label>';
 		fclose($fp);
 		
 	}
@@ -108,6 +110,7 @@ if ((isSet($_POST['gestion'])) && ($_POST['gestion'] == 'Envoyer')) {
                                 //	Affichage des erreurs de contr�le
                                 if (count($error) > 0) { for ($i = 0; $i < count($error); $i++) { echo $error[$i].'<br />'; } }
                                 ?>
+                                <?php echo $success; ?>
                             </div>
                         </div>
                     </div>
@@ -127,7 +130,7 @@ if ((isSet($_POST['gestion'])) && ($_POST['gestion'] == 'Envoyer')) {
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                 <label>Entrer votre mot de passe </label><input class="form-control" type="password" name="password1" value="" />
+                                 <label>Entrer votre mot de passe (6 caractères minimum) </label><input class="form-control" type="password" name="password1" value="" />
                             </div>
                         </div>
                     </div>
