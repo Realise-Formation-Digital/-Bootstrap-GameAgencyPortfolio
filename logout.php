@@ -1,13 +1,9 @@
 <?php
 
-function logoutUser(){
-	unset($_SESSION['user']);
-    unset($_SESSION['email']);
-}
-    
-	logoutUser();
-    header('Location: index.html');
-
+    session_start();
+    $_SESSION = array();
+    session_destroy();
+    header('Location: index.php');
 ?>
 
     
