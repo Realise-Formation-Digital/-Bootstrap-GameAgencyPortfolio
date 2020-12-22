@@ -132,9 +132,6 @@ if(isset($_POST["submit"])) {
             </div>
         </div>
             
-<footer>
-    <?php include 'footer.php'; ?>
-</footer>
     </div>
 
 </section>
@@ -172,3 +169,5 @@ if(isset($_POST["submit"])) {
 </div>
 </form>
 
+
+<?php include 'footer.php'; ?>
