@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +25,7 @@
         if ($_SESSION['logg'] == '') {
           echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#loginModal">Connexion</button>';
         } else {
+            echo $_SESSION['logg']['user'];
           echo '<form name="logout" method="GET" action="../logout.php"><input type="submit" value="Se déconnecter" class="btn btn-info"></form>';
 
         }
@@ -36,20 +41,14 @@
         <p>Votre Agence de Game développement multisupports</p>
     </div>
     <div class="container">
-        <div><h1>Administration</h1></div>
+        <div><h1>Vos messages</h1></div>
         <div class="row">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-3">
-                        <h2>Nom</h2>
-                    </div>
-                    <div class="col-3">
-                        <h2>E-mail</h2>
-                    </div>
-                    <div class="col-3">
+                    <div class="col-6">
                         <h2>Sujet</h2>
                     </div>
-                    <div class="col-3">
+                    <div class="col-6">
                         <h2>Message</h2>
                     </div>
                 </div>
@@ -71,19 +70,14 @@ if (($handle = fopen("../messages.csv", "r")) !== FALSE) {
             echo '<div class="row">';
         }
        
-        for ($c=0; $c < $num; $c++) {
+        for ($c=2; $c < $num; $c++) {
             //echo $data[$c] . "<br />\n";
-            if(empty($data[$c])) {
-               $value = "&nbsp;";
-            }else{
+            if ($data[1] == $_SESSION['logg']['email']){
                $value = $data[$c];
-            }
-            if ($row == 1) {
-                echo '<div class="col-3"><p>'.$value.'</p></div>';
-            }else{
-                echo '<div class="col-3"><p>'.$value.'</p></div>';
-            }
+               echo '<div class="col-6"><p>'.$value.'</p></div>';
+            }        
         }
+        
        
         if ($row == 1) {
             echo '</div>';

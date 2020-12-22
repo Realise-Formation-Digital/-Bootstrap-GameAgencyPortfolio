@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+# csv
+www/users.csv
+www/messages.csv
