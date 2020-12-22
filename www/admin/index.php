@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-    <div class="row">
+        <div class="row">
 <?php
 
 $row = 1;
@@ -97,8 +97,9 @@ if (($handle = fopen("../messages.csv", "r")) !== FALSE) {
     fclose($handle);
 }
 ?>
-        </div>
+</div>
     </div>
+
 </section>
 <script>
 jQuery(document).ready(function($){
