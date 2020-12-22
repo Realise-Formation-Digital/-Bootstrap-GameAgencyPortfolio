@@ -4,6 +4,10 @@ session_start();
 
 ?>
 <?php include('header.php'); ?>
+<div class="jumbotron text-center">
+        <h1>ADALT Agency</h1>
+        <p>Votre Agence de Game développement multisupports</p>
+</div>
 <div class="container-xl" style="margin-top: 1%;">
 
     <div class="row">
@@ -296,7 +300,6 @@ session_start();
                         <h4>Login</h4>
                     </div>
                     <div class="d-flex flex-column text-center">
-                        <form>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="user" placeholder="Nom d'utilisateur...">
                             </div>
@@ -304,14 +307,14 @@ session_start();
                                 <input type="password" class="form-control" name="pwd" placeholder="Mot de passe...">
                             </div>
                             <button type="submit" class="btn btn-info btn-block btn-round" name="gestion" value="Connexion">Connexion</button>
-                        </form>
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
                     <div class="signup-section">Pas encore membre? <a href="register.php" class="text-info"> S'inscrire</a>.</div>
                 </div>
-            </div>
+            </div>                  
         </div>
+    </div>
 </form>
 
 

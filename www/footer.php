@@ -1,6 +1,6 @@
 <footer>
 <div class="container">
-        <div class="row">
+        <div class="row" style="height: 220px">
             <div class="col-12">
 <?php
 echo "<p>Copyright &copy; " . date("Y") . " ADALT Agency</p>";

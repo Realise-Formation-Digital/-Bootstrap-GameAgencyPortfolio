@@ -139,35 +139,34 @@ if ((isSet($_POST['gestion'])) && ($_POST['gestion'] == 'Envoyer')) {
 
 <!-- Modal Login-->
 <form name="login" method="POST" action="login.php">
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header border-bottom-0">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-title text-center">
-          <h4>Login</h4>
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-title text-center">
+                        <h4>Login</h4>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="user" placeholder="Nom d'utilisateur...">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="pwd" placeholder="Mot de passe...">
+                            </div>
+                            <button type="submit" class="btn btn-info btn-block btn-round" name="gestion" value="Connexion">Connexion</button>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <div class="signup-section">Pas encore membre? <a href="register.php" class="text-info"> S'inscrire</a>.</div>
+                </div>
+            </div>                  
         </div>
-        <div class="d-flex flex-column text-center">
-          <form>
-            <div class="form-group">
-              <input type="text" class="form-control" name="user" placeholder="Nom d'utilisateur...">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" name="pwd" placeholder="Mot de passe...">
-            </div>
-            <button type="submit" class="btn btn-info btn-block btn-round" name="gestion" value="Connexion">Connexion</button>
-          </form>
-        </div>
-      </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <div class="signup-section">Pas encore membre? <a href="register.php" class="text-info"> S'inscrire</a>.</div>
-      </div>
-  </div>
-</div>
+    </div>
 </form>
 
     
