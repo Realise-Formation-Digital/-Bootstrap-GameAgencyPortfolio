@@ -11,10 +11,10 @@ session_start();
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-                <img src="public/image/The Last of Us Part II.jpg" class=" float-left img-thumbnail" alt="lastofus">
+                <img src="public/image/TheLastofUsPartII.jpg" class=" float-left img-thumbnail" alt="lastofus">
             </div>
             <div class="col-sm-4">
-                <img src="public/image/adalt.png" class=" float-left img-thumbnail" alt="communaute">
+                <img src="public/image/adalt.png" class=" float-center img-thumbnail" alt="communaute">
             </div>
             <div class="col-sm-4">
                 <img src="public/image/Retimed.jpg" class="float-right img-thumbnail" alt="retimed">
@@ -106,7 +106,7 @@ session_start();
                                                 <td>Apple Inc, Microsoft</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row" class="bg-dark">
+                                                <th scope="row">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
                                                         <label class="form-check-label" for="defaultCheck3">
@@ -145,11 +145,6 @@ session_start();
                 </div>
             </div>
         </section>
-
-        <footer>
-            <?php include 'footer.php';?>
-        </footer>
-        
     </div>
 </section>
 <!-- Modal Login-->
@@ -175,15 +170,15 @@ session_start();
                                 <input type="password" class="form-control" name="pwd" placeholder="Mot de passe...">
                             </div>
                             <button type="submit" class="btn btn-info btn-block btn-round" name="gestion" value="Connexion">Connexion</button>
-                        </form>
+                        form>
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
                     <div class="signup-section">Pas encore membre? <a href="register.php" class="text-info"> S'inscrire</a>.</div>
                 </div>
-            </div>
-            
+            </div>                  
         </div>
+    </div>
 </form>
 
 <?php include 'footer.php'; ?>
