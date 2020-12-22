@@ -3,7 +3,7 @@
 session_start();
 
 ?>
-<?php include('header.php');?>
+<?php include('header.php'); ?>
 <div class="container-xl" style="margin-top: 1%;">
 
     <div class="row">
@@ -21,9 +21,7 @@ session_start();
 
                     <div class="row justify-content-center align-items-center">
                         <div class="col-6 my-auto">
-                            <img class="card-img-top"
-                                 src="https://bnetcmsus-a.akamaihd.net/cms/blog_header/m3/M3J5WP3LK7NA1605660497618.jpg"
-                                 alt="Card image cap">
+                            <img class="card-img-top" src="https://bnetcmsus-a.akamaihd.net/cms/blog_header/m3/M3J5WP3LK7NA1605660497618.jpg" alt="Card image cap">
                         </div>
                         <div class="col-6 my-auto">
 
@@ -45,9 +43,7 @@ session_start();
                 <div class="card-body">
                     <div class="row justify-content-center align-items-center">
                         <div class="col-6 my-auto">
-                            <img class="card-img-top"
-                                 src="https://bnetcmsus-a.akamaihd.net/cms/blog_header/ut/UTODO5ISTOJS1605809797118.png"
-                                 alt="Card image cap">
+                            <img class="card-img-top" src="https://bnetcmsus-a.akamaihd.net/cms/blog_header/ut/UTODO5ISTOJS1605809797118.png" alt="Card image cap">
                         </div>
                         <div class="col-6 my-auto">
 
@@ -70,9 +66,7 @@ session_start();
                 <div class="card-body">
                     <div class="row justify-content-center align-items-center">
                         <div class="col-6 my-auto">
-                            <img class="card-img-top"
-                                 src="https://bnetcmsus-a.akamaihd.net/cms/blog_header/dj/DJYJU6AWEZ861605564141586.jpg"
-                                 alt="Card image cap">
+                            <img class="card-img-top" src="https://bnetcmsus-a.akamaihd.net/cms/blog_header/dj/DJYJU6AWEZ861605564141586.jpg" alt="Card image cap">
                         </div>
                         <div class="col-6 my-auto">
 
@@ -94,9 +88,7 @@ session_start();
                 <div class="card-body">
                     <div class="row justify-content-center align-items-center">
                         <div class="col-6 my-auto">
-                            <img class="card-img-top"
-                                 src="https://bnetcmsus-a.akamaihd.net/cms/blog_header/qn/QNC676IM1R211605729078551.jpg"
-                                 alt="Card image cap">
+                            <img class="card-img-top" src="https://bnetcmsus-a.akamaihd.net/cms/blog_header/qn/QNC676IM1R211605729078551.jpg" alt="Card image cap">
                         </div>
                         <div class="col-6 my-auto">
 
@@ -120,9 +112,7 @@ session_start();
                 <div class="card-body">
                     <div class="row justify-content-center align-items-center">
                         <div class="col-6 my-auto">
-                            <img class="card-img-top"
-                                 src="https://bnetcmsus-a.akamaihd.net/cms/blog_header/RTAFB876GBPP1598407904174.jpg"
-                                 alt="Card image cap">
+                            <img class="card-img-top" src="https://bnetcmsus-a.akamaihd.net/cms/blog_header/RTAFB876GBPP1598407904174.jpg" alt="Card image cap">
                         </div>
                         <div class="col-6 my-auto">
 
@@ -149,9 +139,7 @@ session_start();
                 <div class="card-body">
                     <div class="row justify-content-center align-items-center">
                         <div class="col-6 my-auto">
-                            <img class="card-img-top"
-                                 src="https://bnetcmsus-a.akamaihd.net/cms/blog_header/l8/L8D932MDIPW81603875277746.jpg"
-                                 alt="Card image cap">
+                            <img class="card-img-top" src="https://bnetcmsus-a.akamaihd.net/cms/blog_header/l8/L8D932MDIPW81603875277746.jpg" alt="Card image cap">
                         </div>
                         <div class="col-6 my-auto">
 
@@ -168,6 +156,8 @@ session_start();
                     </div>
                 </div>
             </div>
+
+  
             <!-- Pagination -->
             <ul class="pagination justify-content-center mb-4">
                 <li class="page-item">
@@ -190,8 +180,8 @@ session_start();
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search for...">
                         <span class="input-group-append">
-                <button class="btn btn-secondary" type="button">Go!</button>
-              </span>
+                            <button class="btn btn-secondary" type="button">Go!</button>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -286,37 +276,40 @@ session_start();
     <!-- /.row -->
 </div>
 
+<footer>
+    <?php include 'footerchris.php'; ?>
+</footer>
+
 <!-- Modal Login-->
 <form name="login" method="POST" action="login.php">
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header border-bottom-0">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-title text-center">
-          <h4>Login</h4>
-        </div>
-        <div class="d-flex flex-column text-center">
-          <form>
-            <div class="form-group">
-              <input type="text" class="form-control" name="user" placeholder="Nom d'utilisateur...">
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-title text-center">
+                        <h4>Login</h4>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="user" placeholder="Nom d'utilisateur...">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="pwd" placeholder="Mot de passe...">
+                            </div>
+                            <button type="submit" class="btn btn-info btn-block btn-round" name="gestion" value="Connexion">Connexion</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <div class="signup-section">Pas encore membre? <a href="register.php" class="text-info"> S'inscrire</a>.</div>
+                </div>
             </div>
-            <div class="form-group">
-              <input type="password" class="form-control" name="pwd" placeholder="Mot de passe...">
-            </div>
-            <button type="submit" class="btn btn-info btn-block btn-round" name="gestion" value="Connexion">Connexion</button>
-          </form>
         </div>
-      </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <div class="signup-section">Pas encore membre? <a href="register.php" class="text-info"> S'inscrire</a>.</div>
-      </div>
-  </div>
-</div>
 </form>
 
-<?php include('footer.php');?>
