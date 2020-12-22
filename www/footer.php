@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 <?php
 echo "<p>Copyright &copy; " . date("Y") . " ADALT Agency</p>";
 ?>
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-=======
 <footer>
         <div class="container">
                 <div class="row">
@@ -17,9 +12,7 @@ echo "<p>Copyright &copy; " . date("Y") . " ADALT Agency</p>";
                 </div>
         </div>
 </footer>
->>>>>>> Stashed changes
-=======
->>>>>>> main
+
 <script>
 jQuery(document).ready(function($){
   // Get current path and find target link
@@ -35,7 +28,7 @@ jQuery(document).ready(function($){
   target.addClass('active');
 });
 </script>
-<<<<<<< HEAD
+
 <script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -50,8 +43,7 @@ jQuery(document).ready(function($){
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </body>
 </html>
->>>>>>> admin-page-protégée
-=======
+
 </body>
 </html>
->>>>>>> main
+
