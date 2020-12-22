@@ -1,10 +1,8 @@
 <?php
-
 session_start();
-
-
 ?>
 <?php include('header.php'); ?>
+<link rel='stylesheet' type='text/css' href="css/style.php" />
 <section>
     <div class="jumbotron text-center">
         <h1>ADALT Agency</h1>
@@ -147,6 +145,37 @@ session_start();
                 </div>
             </div>
         </section>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+        <footer>
+            <div class="flex">
+                <small>Copyright &copy;2020 All right reserved | This template is made with <span class="footer-star">&#9829;</span>by
+                    <a href="https://www.realise.ch/" target="blank">Adalt</a>.</small>
+                <ul>
+                    <li>
+                        <a href="home"></a>
+                    </li>
+
+                    <li>
+                        <a href="home"></a>
+                    </li>
+>>>>>>> admin-page-protégée
+
+        <footer>
+            <?php include 'footer.php';?>
+        </footer>
+<<<<<<< HEAD
+        
+=======
+=======
+
+        
+>>>>>>> Stashed changes
+>>>>>>> admin-page-protégée
+=======
+>>>>>>> main
     </div>
 </section>
 <!-- Modal Login-->
@@ -180,6 +209,24 @@ session_start();
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <div class="signup-section">Pas encore membre? <a href="register.php" class="text-info"> S'inscrire</a>.</div>
+      </div>
+  </div>
+</div>
+=======
+    </div>
+>>>>>>> Stashed changes
+>>>>>>> admin-page-protégée
 </form>
+<<<<<<< HEAD
+<?php include 'footer.php'; ?>
+
+=======
 <?php include 'footer.php';?>
+>>>>>>> main
 
