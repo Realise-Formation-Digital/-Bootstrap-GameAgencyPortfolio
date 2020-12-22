@@ -13,13 +13,13 @@ session_start();
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-                <img src="public/image/The Last of Us Part II.jpg" class=" float-left img-thumbnail" alt="...">
+                <img src="public/image/The Last of Us Part II.jpg" class=" float-left img-thumbnail" alt="lastofus">
             </div>
             <div class="col-sm-4">
-                <img src="public/image/card-communaute.jpg" class=" float-left img-thumbnail" alt="...">
+                <img src="public/image/adalt.png" class=" float-left img-thumbnail" alt="communaute">
             </div>
             <div class="col-sm-4">
-                <img src="public/image/Retimed.jpg" class="float-right img-thumbnail" alt="...">
+                <img src="public/image/Retimed.jpg" class="float-right img-thumbnail" alt="retimed">
             </div>
         </div>
         <section>
@@ -65,7 +65,7 @@ session_start();
                         <div class="col-sm">
                             <section>
                                 <h1>News</h1>
-                                <img src="H2x1_NSwitchDS_TheBridge_image1600w.jpg" alt="Image du jeu The Bridge"
+                                <img src="public/image/twwh2.jpg" alt="Image du jeu The Bridge"
                                      width="300px">
                                 <p>
                                     
