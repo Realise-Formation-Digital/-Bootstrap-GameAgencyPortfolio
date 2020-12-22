@@ -267,18 +267,21 @@ session_start();
                         <a class="twitter-timeline" data-width="100%" href="https://twitter.com/blizzard_ent">Tweets by
                             Blizzard</a>
                     </div>
+            
                 </div>
 
             </div>
+            
         </div>
 
     </div>
+    <footer>
+    <?php include 'footer.php'; ?>
+</footer>
     <!-- /.row -->
 </div>
 
-<footer>
-    <?php include 'footerchris.php'; ?>
-</footer>
+
 
 <!-- Modal Login-->
 <form name="login" method="POST" action="login.php">

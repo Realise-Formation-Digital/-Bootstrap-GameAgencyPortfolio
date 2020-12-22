@@ -149,7 +149,7 @@ session_start();
         </section>
 
         <footer>
-            <?php include 'footerchris.php';?>
+            <?php include 'footer.php';?>
         </footer>
         
     </div>
