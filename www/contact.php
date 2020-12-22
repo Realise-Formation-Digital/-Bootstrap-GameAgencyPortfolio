@@ -72,11 +72,6 @@ if(isset($_POST["submit"])) {
 
 ?>
 
-<?php
-
-session_start();
-
-?>
 <?php include('header.php');?>
 <section>
     <div class="jumbotron text-center">
