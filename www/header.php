@@ -21,8 +21,9 @@
         if ($_SESSION['logg'] == '') {
           echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#loginModal">Connexion</button>';
         } else {
+          echo $_SESSION['logg']['user'];
           echo '<form name="logout" method="GET" action="logout.php"><input type="submit" value="Se déconnecter" class="btn btn-info"></form>';
-
+          echo '<form name="messages" method="GET" action="admin\index.php"><input type="submit" value="Messages" class="btn btn-info"></form>';
         }
         ?>
         </div>
