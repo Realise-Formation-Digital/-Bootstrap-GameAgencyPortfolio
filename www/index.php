@@ -151,6 +151,7 @@ session_start();
                 </div>
             </div>
         </section>
+<<<<<<< Updated upstream
         <footer>
             <div class="flex">
                 <small>Copyright &copy;2020 All right reserved | This template is made with <span class="footer-star">&#9829;</span>by
@@ -174,6 +175,10 @@ session_start();
                 </ul>
             </div>
         </footer>
+=======
+
+        
+>>>>>>> Stashed changes
     </div>
 </section>
 <!-- Modal Login-->
@@ -201,13 +206,18 @@ session_start();
             <button type="submit" class="btn btn-info btn-block btn-round" name="gestion" value="Connexion">Connexion</button>
           </form>
         </div>
+<<<<<<< Updated upstream
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <div class="signup-section">Pas encore membre? <a href="register.php" class="text-info"> S'inscrire</a>.</div>
       </div>
   </div>
 </div>
+=======
+    </div>
+>>>>>>> Stashed changes
 </form>
+<?php include 'footer.php'; ?>
 
     
 <?php include('footer.php');?>
