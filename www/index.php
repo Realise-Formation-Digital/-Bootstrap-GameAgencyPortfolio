@@ -182,10 +182,10 @@ session_start();
                     <div class="signup-section">Pas encore membre? <a href="register.php" class="text-info"> S'inscrire</a>.</div>
                 </div>
             </div>
-            <footer>
-    <?php include 'footer.php'; ?>
-</footer>
+            
         </div>
 </form>
+
+<?php include 'footer.php'; ?>
 
 

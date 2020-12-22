@@ -275,9 +275,7 @@ session_start();
         </div>
 
     </div>
-    <footer>
-    <?php include 'footer.php'; ?>
-</footer>
+
     <!-- /.row -->
 </div>
 
@@ -315,4 +313,7 @@ session_start();
             </div>
         </div>
 </form>
+
+
+<?php include 'footer.php'; ?>
 
