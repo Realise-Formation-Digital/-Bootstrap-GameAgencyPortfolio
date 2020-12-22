@@ -97,9 +97,8 @@ if (($handle = fopen("../messages.csv", "r")) !== FALSE) {
     fclose($handle);
 }
 ?>
-</div>
+        </div>
     </div>
-
 </section>
 <script>
 jQuery(document).ready(function($){
