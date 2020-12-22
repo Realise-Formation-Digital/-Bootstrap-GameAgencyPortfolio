@@ -146,6 +146,7 @@ session_start();
             </div>
         </section>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< Updated upstream
         <footer>
@@ -173,6 +174,8 @@ session_start();
         
 >>>>>>> Stashed changes
 >>>>>>> admin-page-protégée
+=======
+>>>>>>> main
     </div>
 </section>
 <!-- Modal Login-->
@@ -220,6 +223,10 @@ session_start();
 >>>>>>> Stashed changes
 >>>>>>> admin-page-protégée
 </form>
+<<<<<<< HEAD
 <?php include 'footer.php'; ?>
 
+=======
+<?php include 'footer.php';?>
+>>>>>>> main
 
