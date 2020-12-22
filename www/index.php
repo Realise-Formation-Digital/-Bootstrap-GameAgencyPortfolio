@@ -147,11 +147,6 @@ session_start();
                 </div>
             </div>
         </section>
-
-        <footer>
-            <?php include 'footer.php';?>
-        </footer>
-        
     </div>
 </section>
 <!-- Modal Login-->
@@ -186,5 +181,5 @@ session_start();
             </div>
         </div>
 </form>
-
+<?php include 'footer.php';?>
 
