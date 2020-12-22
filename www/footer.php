@@ -1,6 +1,11 @@
+<div class="container">
+        <div class="row">
+            <div class="col-12">
 <?php
 echo "<p>Copyright &copy; " . date("Y") . " ADALT Agency</p>";
-?>
+?>          </div>
+      </div>
+</div>
 <script>
 jQuery(document).ready(function($){
   // Get current path and find target link
