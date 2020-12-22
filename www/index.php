@@ -1,10 +1,8 @@
 <?php
-
 session_start();
-
-
 ?>
 <?php include('header.php'); ?>
+<link rel='stylesheet' type='text/css' href="css/style.php" />
 <section>
     <div class="jumbotron text-center">
         <h1>ADALT Agency</h1>
