@@ -95,7 +95,7 @@ session_start();
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th scope="row" root="grey">
+                                                <th scope="row" root="white">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
                                                         <label class="form-check-label" for="defaultCheck2">
